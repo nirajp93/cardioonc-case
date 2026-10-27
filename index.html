@@ -283,14 +283,14 @@ body.sheet-open #sheet{transform:none}
   <h2>Her cardiac MRI, in motion</h2>
   <p class="muted" style="margin-top:-6px">Month 19 — one mid-ventricular slice. The poster can only print two frames of this; here is the whole cardiac cycle.</p>
   <div class="panel">
-    <img id="cineimg" src="assets/cine_loop.webp" alt="Cine CMR loop of a dilated left ventricle contracting minimally through the cardiac cycle" style="width:100%; border-radius:12px; display:block">
+    <img id="cineimg" src="cine_loop.webp" alt="Cine CMR loop of a dilated left ventricle contracting minimally through the cardiac cycle" style="width:100%; border-radius:12px; display:block">
     <p class="cap"><b>A full heartbeat, looping.</b> A dilated, thin-walled ventricle that barely changes size from diastole to systole — this is what an ejection fraction of 7–10% looks like.</p>
     <div class="cine" style="margin-top:14px">
-      <div><img src="assets/ed.jpg" alt="Cine CMR still at end-diastole"><div class="cap"><b>End-diastole</b> — fully filled</div></div>
-      <div><img src="assets/es.jpg" alt="Cine CMR still at end-systole, nearly unchanged from diastole"><div class="cap"><b>End-systole</b> — almost no change</div></div>
+      <div><img src="ed.jpg" alt="Cine CMR still at end-diastole"><div class="cap"><b>End-diastole</b> — fully filled</div></div>
+      <div><img src="es.jpg" alt="Cine CMR still at end-systole, nearly unchanged from diastole"><div class="cap"><b>End-systole</b> — almost no change</div></div>
     </div>
     <div class="lgewrap" id="lgewrap">
-      <img src="assets/lge.jpg" alt="Phase-sensitive late gadolinium enhancement image of the same slice">
+      <img src="lge.jpg" alt="Phase-sensitive late gadolinium enhancement image of the same slice">
       <svg viewBox="0 0 100 100" aria-hidden="true">
         <ellipse cx="44" cy="46" rx="21" ry="23" fill="none" stroke="var(--orange)" stroke-width="1.4" stroke-dasharray="3 2.4" opacity=".85"/>
         <line x1="16" y1="86" x2="41" y2="48" stroke="var(--orange)" stroke-width="2"/>
@@ -455,7 +455,7 @@ lgebtn.addEventListener('click', () => {
 
 // respect reduced motion: swap the cine loop for the still
 try{ if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-  const c = document.getElementById('cineimg'); c.src = 'assets/ed.jpg';
+  const c = document.getElementById('cineimg'); c.src = 'ed.jpg';
 }}catch(e){}
 </script>
 

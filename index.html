@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>When LV Dysfunction Predates Chemotherapy</title>
+<meta name="description" content="Interactive clinical vignette: severe cardiomyopathy after limited anthracycline exposure — UC Davis Health.">
+<style>html,body{margin:0} img{max-width:100%}</style>
+</head>
+<body>
+
+<style>
+/* Layout: single mobile-first column; the case's own palette (poster-matched) */
+:root{
+  --bg:#faf9f7; --surface:#ffffff; --ink:#15150f; --ink2:#52514e; --line:#e3e2dc;
+  --navy:#1E2761; --blue:#2A78D6; --orange:#D95320; --green:#0E9466;
+  --band:#ecebe6; --chip-o:#fbe9e2; --chip-g:#e0f3eb; --chip-b:#e4eefb; --maroon:#7a2342; --chip-m:#f3e2e9;
+  --sheet:#ffffff; --scrim:rgba(21,21,15,.45);
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#12130f; --surface:#1c1d18; --ink:#ecebe4; --ink2:#a5a49b; --line:#32332c;
+  --navy:#9aa8e8; --blue:#6aa5e8; --orange:#f08a5c; --green:#3fc392;
+  --band:#24251f; --chip-o:#39241c; --chip-g:#17352a; --chip-b:#1d2a3d; --maroon:#d98cab; --chip-m:#3a2230;
+  --sheet:#22231d; --scrim:rgba(0,0,0,.6); color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#12130f; --surface:#1c1d18; --ink:#ecebe4; --ink2:#a5a49b; --line:#32332c;
+  --navy:#9aa8e8; --blue:#6aa5e8; --orange:#f08a5c; --green:#3fc392;
+  --band:#24251f; --chip-o:#39241c; --chip-g:#17352a; --chip-b:#1d2a3d; --maroon:#d98cab; --chip-m:#3a2230;
+  --sheet:#22231d; --scrim:rgba(0,0,0,.6); color-scheme:dark }
+
+*{box-sizing:border-box}
+body{background:var(--bg); color:var(--ink);
+  font-family:'Inter',system-ui,-apple-system,sans-serif; font-size:16.5px; line-height:1.6;
+  padding-left:max(16px,env(safe-area-inset-left,0px)); padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-block:0 48px;}
+.wrap{max-width:680px; margin:0 auto}
+h1,h2,h3{font-family:'Inter',system-ui,sans-serif; color:var(--navy); text-wrap:balance; line-height:1.22}
+h1{font-size:clamp(26px,6.4vw,38px); font-weight:800; letter-spacing:-.015em; margin:14px 0 10px}
+h2{font-size:22px; font-weight:800; margin:0 0 12px}
+h3{font-size:17px; font-weight:700; margin:0 0 6px; color:var(--ink)}
+p{margin:9px 0}
+section{margin:40px 0}
+.eyebrow{font-size:12px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--ink2); margin-top:26px}
+.authors{font-size:13.5px; color:var(--ink2); margin:4px 0 0}
+.lede{font-size:19px; line-height:1.5; margin:16px 0 6px}
+.lede b{font-weight:800}
+.o{color:var(--orange)} .b{color:var(--blue)} .g{color:var(--green)} .n{color:var(--navy)}
+.muted{color:var(--ink2); font-size:14px}
+
+/* stat chips */
+.chips{display:flex; gap:8px; flex-wrap:wrap; margin:18px 0 6px}
+.chips a{flex:1 1 30%; min-width:104px; text-decoration:none; border-radius:12px; padding:10px 12px; border:1px solid var(--line); background:var(--surface)}
+.chips a .v{font-size:22px; font-weight:800; font-variant-numeric:tabular-nums}
+.chips a .l{font-size:12px; color:var(--ink2); line-height:1.3}
+.chips a:nth-child(1) .v{color:var(--orange)} .chips a:nth-child(2) .v{color:var(--ink)} .chips a:nth-child(3) .v{color:var(--green)}
+
+/* question card */
+.question{background:var(--navy); color:#fff; border-radius:14px; padding:16px 18px; margin:22px 0}
+:root[data-theme="dark"] .question, .dkq{background:#232a52}
+.question .q{font-size:18px; font-weight:700; line-height:1.4; color:#fff}
+.question .a{font-size:14px; color:#c7d2f4; margin-top:6px}
+
+/* chart */
+.panel{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:14px}
+.chart-note{min-height:64px; font-size:14.5px; color:var(--ink2); border-top:1px dashed var(--line); margin-top:8px; padding-top:8px}
+.chart-note b{color:var(--ink)}
+.toggle{appearance:none; border:1.5px solid var(--blue); color:var(--blue); background:none; border-radius:999px; padding:6px 14px; font:inherit; font-size:13.5px; font-weight:600; cursor:pointer}
+.toggle[aria-pressed="true"]{background:var(--blue); color:#fff}
+svg text{font-family:'Inter',system-ui,sans-serif}
+.pt{cursor:pointer}
+.pt:focus-visible circle{stroke-width:4}
+
+/* timeline rail */
+.rail{list-style:none; margin:0; padding:0; position:relative}
+.rail::before{content:""; position:absolute; left:19px; top:14px; bottom:14px; width:3px; background:var(--line); border-radius:2px}
+.rail li{position:relative; padding-left:54px; margin:0 0 14px}
+.node{position:absolute; left:0; top:2px; width:40px; height:40px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px; color:#fff; z-index:1}
+.node.dx{background:#8a8984} .node.m0{background:var(--orange)} .node.band{background:var(--blue)}
+.node.mar{background:var(--chip-m); color:var(--maroon); border:1px solid var(--line)}
+.node.m19{background:var(--ink); color:var(--bg)} .node.m22{background:var(--green)}
+details.card{background:var(--surface); border:1px solid var(--line); border-radius:14px; overflow:hidden}
+details.card>summary{list-style:none; cursor:pointer; padding:13px 44px 13px 16px; position:relative}
+details.card>summary::-webkit-details-marker{display:none}
+details.card>summary::after{content:"+"; position:absolute; right:16px; top:10px; font-size:22px; color:var(--ink2); font-weight:400}
+details.card[open]>summary::after{content:"–"}
+details.card>summary .h{font-weight:700; color:var(--navy); font-size:16.5px}
+details.card>summary .s{font-size:14px; color:var(--ink2); line-height:1.45; margin-top:2px}
+.card-body{padding:2px 16px 14px; border-top:1px dashed var(--line); font-size:15px}
+.kv{display:grid; grid-template-columns:auto 1fr; gap:3px 14px; margin:10px 0; font-size:14.5px}
+.kv dt{color:var(--ink2); font-weight:600; white-space:nowrap}
+.kv dd{margin:0; font-variant-numeric:tabular-nums}
+
+/* term buttons → glossary sheet */
+button.t{appearance:none; background:none; border:none; padding:0; margin:0; font:inherit; color:inherit;
+  border-bottom:2px dotted var(--blue); cursor:pointer}
+button.t:focus-visible{outline:2px solid var(--blue); outline-offset:2px}
+
+/* cmr */
+.cine{display:grid; grid-template-columns:1fr 1fr; gap:12px; align-items:start}
+.cine img{width:100%; border-radius:12px; display:block}
+.cap{font-size:13px; color:var(--ink2); margin-top:6px; line-height:1.4}
+.lgewrap{position:relative; margin-top:14px}
+.lgewrap img{width:100%; border-radius:12px; display:block}
+.lgewrap svg{position:absolute; inset:0; width:100%; height:100%; pointer-events:none; opacity:0; transition:opacity .35s}
+.lgewrap.on svg{opacity:1}
+@media (max-width:430px){ .cine{grid-template-columns:1fr 1fr} }
+
+/* claims */
+.claim{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:14px 16px; margin:12px 0}
+.claim .num{display:inline-flex; width:26px; height:26px; border-radius:50%; background:var(--navy); color:var(--bg); align-items:center; justify-content:center; font-weight:800; font-size:14px; margin-right:8px}
+:root[data-theme="dark"] .claim .num{color:#12130f}
+.claim h3{display:flex; align-items:center; color:var(--navy)}
+details.deeper{margin-top:8px}
+details.deeper>summary{list-style:none; cursor:pointer; font-size:13.5px; font-weight:700; color:var(--blue)}
+details.deeper>summary::-webkit-details-marker{display:none}
+details.deeper>summary::before{content:"▸ "}
+details.deeper[open]>summary::before{content:"▾ "}
+details.deeper .inner{font-size:14.5px; color:var(--ink2); border-left:3px solid var(--line); padding-left:12px; margin-top:8px}
+details.deeper .inner b{color:var(--ink)}
+
+/* algorithm */
+.algo{list-style:none; margin:0; padding:0}
+.algo li{border-radius:12px; padding:12px 14px; margin:0; text-align:center; font-size:15.5px; background:var(--surface); border:1px solid var(--line)}
+.algo li.hot{background:var(--chip-o); border-color:transparent; font-weight:700}
+.algo li.go{background:var(--chip-g); border-color:transparent; font-weight:700}
+.algo .arr{text-align:center; color:var(--ink2); margin:2px 0; font-size:17px}
+
+/* refs + footer */
+.refs{font-size:13.5px; color:var(--ink2)}
+.refs li{margin:6px 0}
+.pdfbtn{display:inline-block; background:var(--navy); color:var(--bg); text-decoration:none; font-weight:700; border-radius:999px; padding:10px 20px; font-size:15px}
+:root[data-theme="dark"] .pdfbtn{color:#12130f}
+.foot{font-size:12.5px; color:var(--ink2); border-top:1px solid var(--line); margin-top:44px; padding-top:14px}
+.draft{background:var(--chip-o); border-radius:10px; padding:8px 12px; font-size:12.5px; color:var(--ink2); margin:18px 0}
+
+/* glossary sheet */
+#scrim{position:fixed; inset:0; background:var(--scrim); opacity:0; pointer-events:none; transition:opacity .25s; z-index:40}
+#sheet{position:fixed; left:0; right:0; bottom:0; background:var(--sheet); border-radius:18px 18px 0 0; z-index:41;
+  transform:translateY(105%); transition:transform .3s cubic-bezier(.3,.9,.3,1);
+  padding:18px max(20px,env(safe-area-inset-right,0px)) calc(22px + env(safe-area-inset-bottom,0px)) max(20px,env(safe-area-inset-left,0px));
+  box-shadow:0 -8px 40px rgba(0,0,0,.18); max-height:70vh; overflow-y:auto}
+body.sheet-open #scrim{opacity:1; pointer-events:auto}
+body.sheet-open #sheet{transform:none}
+#sheet h3{color:var(--navy); margin:0 0 6px; padding-right:40px}
+#sheet p{font-size:15px; color:var(--ink2); margin:6px 0}
+#sheet .close{position:absolute; right:14px; top:12px; width:32px; height:32px; border-radius:50%; border:none; background:var(--band); color:var(--ink); font-size:17px; cursor:pointer}
+@media (prefers-reduced-motion: reduce){ #sheet,#scrim,.lgewrap svg{transition:none} }
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap">
+
+<div class="wrap">
+
+<div class="eyebrow">Clinical vignette · Cardio-oncology · UC Davis Health</div>
+<h1>When Left Ventricular Dysfunction Predates Chemotherapy</h1>
+<p class="authors">Niraj R. Punjya, Abigail Y. T. Low, Imo A. Ebong, Shirin Jimenez, Eric D. Signoff</p>
+
+<p class="lede">Her ejection fraction was <b class="o">43%</b> before any chemotherapy, collapsed <b>below 10%</b> after surgery and sepsis a year later, and returned to <b class="g">38–40%</b> — her pre-treatment range — within 3 months.</p>
+
+<div class="chips">
+  <a href="#timeline"><div class="v">43%</div><div class="l">before chemo<br>(MUGA)</div></a>
+  <a href="#cmr"><div class="v">&lt;10%</div><div class="l">month 19<br>HF admission</div></a>
+  <a href="#meaning"><div class="v">38–40%</div><div class="l">month 22<br>on GDMT</div></a>
+</div>
+
+<div class="question">
+  <div class="q">Did chemotherapy cause this heart failure — or reveal a heart that was already failing?</div>
+  <div class="a">Tap any dotted term for a plain-language definition. Tap timeline entries and chart points for the data behind them.</div>
+</div>
+
+<!-- ================= EF CHART ================= -->
+<section id="chart">
+  <h2>Ejection fraction over 22 months</h2>
+  <div class="panel">
+    <svg viewBox="0 0 360 232" role="img" aria-label="LVEF over 22 months: 43 percent before chemotherapy, below 10 percent at month 19, 38 to 40 percent at month 22">
+      <!-- plot area x:36..352  y:16..196 ; x = 36 + month*(316/24); y = 196 - pct*1.8 -->
+      <g id="bands">
+        <rect x="49.2" y="16" width="65.8" height="180" fill="var(--chip-b)"/>
+        <rect x="259.8" y="16" width="17.1" height="180" fill="var(--chip-m)"/>
+      </g>
+      <rect id="varband" x="36" y="95.2" width="316" height="39.6" fill="var(--blue)" opacity="0" style="transition:opacity .3s"/>
+      <g stroke="var(--line)" stroke-width="1">
+        <line x1="36" y1="196" x2="352" y2="196"/>
+        <line x1="36" y1="160" x2="352" y2="160" opacity=".45"/>
+        <line x1="36" y1="124" x2="352" y2="124" opacity=".45"/>
+        <line x1="36" y1="88"  x2="352" y2="88"  opacity=".45"/>
+        <line x1="36" y1="52"  x2="352" y2="52"  opacity=".45"/>
+      </g>
+      <line x1="36" y1="106" x2="352" y2="106" stroke="var(--ink)" stroke-width="1.4" stroke-dasharray="1.5 3.2"/>
+      <text x="350" y="101" font-size="9.5" fill="var(--ink)" text-anchor="end">50% — high-risk threshold</text>
+      <g font-size="10" fill="var(--ink2)">
+        <text x="30" y="199" text-anchor="end">0</text>
+        <text x="30" y="163" text-anchor="end">20</text>
+        <text x="30" y="127" text-anchor="end">40</text>
+        <text x="30" y="91" text-anchor="end">60</text>
+        <text x="30" y="55" text-anchor="end">80</text>
+        <text x="36" y="212" text-anchor="middle">0</text>
+        <text x="115" y="212" text-anchor="middle">6</text>
+        <text x="194" y="212" text-anchor="middle">12</text>
+        <text x="273" y="212" text-anchor="middle">18</text>
+        <text x="352" y="212" text-anchor="middle">24</text>
+        <text x="194" y="228" text-anchor="middle" font-size="10.5">Months from lymphoma diagnosis</text>
+        <text x="71" y="30" font-size="9.5" fill="var(--blue)" text-anchor="middle">Chemo</text>
+        <text x="268.5" y="30" font-size="9.5" fill="var(--maroon)" text-anchor="middle">Sepsis</text>
+      </g>
+      <line x1="55.75" y1="115" x2="286.2" y2="180.7" stroke="var(--blue)" stroke-width="1.6" stroke-dasharray="5.5 4"/>
+      <polyline points="55.75,115 259.8,115 286.2,180.7" fill="none" stroke="var(--maroon)" stroke-width="1.6" stroke-dasharray="5.5 4"/>
+      <line x1="36" y1="118.4" x2="55.75" y2="115" stroke="var(--blue)" stroke-width="2"/>
+      <line x1="286.2" y1="180.7" x2="329.6" y2="125.8" stroke="var(--green)" stroke-width="2.4"/>
+      <line x1="55.75" y1="95.2" x2="55.75" y2="134.8" stroke="var(--blue)" stroke-width="2"/>
+      <line x1="50.75" y1="95.2" x2="60.75" y2="95.2" stroke="var(--blue)" stroke-width="2"/>
+      <line x1="50.75" y1="134.8" x2="60.75" y2="134.8" stroke="var(--blue)" stroke-width="2"/>
+      <g class="pt" data-pt="muga" tabindex="0" role="button" aria-label="MUGA 43.1 percent, month 0"><circle cx="36" cy="118.4" r="9" fill="var(--orange)" stroke="var(--bg)" stroke-width="2.5"/><circle cx="36" cy="118.4" r="16" fill="transparent"/></g>
+      <g class="pt" data-pt="echo" tabindex="0" role="button" aria-label="Echo about 45 percent after cycle 1"><circle cx="55.75" cy="115" r="7" fill="var(--blue)" stroke="var(--bg)" stroke-width="2.5"/><circle cx="55.75" cy="115" r="16" fill="transparent"/></g>
+      <g class="pt" data-pt="nadir" tabindex="0" role="button" aria-label="Below 10 percent at month 19"><circle cx="286.2" cy="180.7" r="8" fill="var(--ink)" stroke="var(--bg)" stroke-width="2.5"/><circle cx="286.2" cy="180.7" r="16" fill="transparent"/></g>
+      <g class="pt" data-pt="rec" tabindex="0" role="button" aria-label="38 to 40 percent at month 22"><circle cx="329.6" cy="125.8" r="9" fill="var(--green)" stroke="var(--bg)" stroke-width="2.5"/><circle cx="329.6" cy="125.8" r="16" fill="transparent"/></g>
+    </svg>
+    <div style="display:flex; justify-content:space-between; align-items:center; gap:10px; margin-top:10px; flex-wrap:wrap">
+      <span class="muted">Tap a point for its story.</span>
+      <button class="toggle" id="varbtn" aria-pressed="false">Show ±11-pt echo variability</button>
+    </div>
+    <div class="chart-note" id="chartnote"><b>Two dashed paths cross the 17-month silence</b> — <span style="color:var(--blue);font-weight:600">gradual anthracycline injury</span> vs <span style="color:var(--maroon);font-weight:600">no decline until the surgical–septic second hit</span>. Both end at the same point; the recovery to her old baseline is what favors the second.</div>
+  </div>
+</section>
+
+<!-- ================= TIMELINE ================= -->
+<section id="timeline">
+  <h2>The case, month by month</h2>
+  <ul class="rail">
+    <li><span class="node dx">Dx</span>
+      <details class="card"><summary><div class="h">64-year-old woman — diagnosis</div><div class="s">EBV-positive colorectal diffuse large B-cell lymphoma</div></summary>
+      <div class="card-body">
+        <p>Diagnosed after weight loss, abdominal pain, and anemia: Epstein-Barr virus–positive <button class="t" data-g="dlbcl">DLBCL</button> of the rectosigmoid colon with bowel, mesenteric, and splenic involvement, complicated by contained perforation and a drained pelvic abscess — a heavy inflammatory burden before therapy even began.</p>
+        <p>Background history: Graves disease treated by remote thyroidectomy (on levothyroxine), and premature ventricular complexes noted before chemotherapy.</p>
+      </div></details></li>
+    <li><span class="node m0">0</span>
+      <details class="card"><summary><div class="h">Before cycle 1 — the pivotal result</div><div class="s">Screening MUGA: LVEF 43.1%, mildly enlarged LV</div></summary>
+      <div class="card-body">
+        <p>A screening <button class="t" data-g="muga">MUGA</button> showed LVEF <b class="o">43.1%</b> with a mildly enlarged left ventricle and no regional wall-motion abnormality — <b>before any anthracycline</b>.</p>
+        <p>A baseline LVEF below 50% is the <button class="t" data-g="icos">HFA-ICOS</button> high-risk category, for which the 2022 ESC guideline recommends cardiology referral before treatment, cardioprotective therapy, and imaging before, during, and after therapy.</p>
+        <p class="muted">No pre-treatment strain imaging or cardiac biomarkers were obtained.</p>
+      </div></details></li>
+    <li><span class="node band">1–6</span>
+      <details class="card"><summary><div class="h">Treatment</div><div class="s">R-CHOP → R-CEOP after cycle 1; six cycles; metabolic response</div></summary>
+      <div class="card-body">
+        <p><button class="t" data-g="rchop">R-CHOP</button> was started. An echocardiogram after cycle 1 read LVEF ≈45%, and etoposide replaced doxorubicin (<button class="t" data-g="rchop">R-CEOP</button>) "due to her lower EF." Doxorubicin exposure was reportedly limited to cycle 1 — roughly <b>50 mg/m²</b> at standard dosing (outside records pending).</p>
+        <p>Read carefully, the 43.1% → 45% "change" crosses two different modalities and sits far inside <button class="t" data-g="var">2D-echo test–retest variability</button>. Dysfunction was <b>recognized</b> after cycle 1, not caused by it.</p>
+        <p>Six cycles were completed with complete metabolic response on PET (<button class="t" data-g="deauville">Deauville 1</button>).</p>
+      </div></details></li>
+    <li><span class="node mar">7–18</span>
+      <details class="card"><summary><div class="h">The second hit builds</div><div class="s">Fistula takedown, recurrent abscesses, malnutrition, DVT</div></summary>
+      <div class="card-body">
+        <p>A chronic enterocutaneous fistula developed and required takedown with small-bowel resection at month 17. The postoperative course brought recurrent intra-abdominal collections, a drained anterior mediastinal collection, malnutrition, severe deconditioning, and a catheter-associated right upper-extremity DVT.</p>
+        <p>Through all of it — 17 months — <b>no one measured the ventricle</b>.</p>
+      </div></details></li>
+    <li><span class="node m19">19</span>
+      <details class="card"><summary><div class="h">Heart-failure admission</div><div class="s">LVEF &lt;10% · NT-proBNP 25,535 · clean coronaries</div></summary>
+      <div class="card-body">
+        <p>Five days of exertional dyspnea, orthopnea, and edema; sinus tachycardia and elevated JVP without hypoperfusion.</p>
+        <dl class="kv">
+          <dt>NT-proBNP</dt><dd>25,535 pg/mL</dd>
+          <dt>hs-troponin T</dt><dd>42–44 ng/L, flat</dd>
+          <dt>Lactate</dt><dd>1.1 mmol/L</dd>
+          <dt>Echo</dt><dd>LVEF &lt;10%, <button class="t" data-g="gls">GLS</button> −3%, 4+ MR, 3+ TR</dd>
+          <dt>CMR</dt><dd><button class="t" data-g="lvedvi">LVEDVI</button> 151 mL/m², LVEF 7–10%, mid-wall septal <button class="t" data-g="lge">LGE</button>, no T2 edema</dd>
+          <dt>Coronary CTA</dt><dd>calcium score 0, no plaque</dd>
+          <dt>CT chest</dt><dd>segmental PE without RV strain</dd>
+        </dl>
+        <p>Management: diuresis, then <button class="t" data-g="gdmt">GDMT</button> (sacubitril/valsartan, metoprolol, spironolactone, dapagliflozin), digoxin and ivabradine for tachycardia with low-output physiology, apixaban, and a wearable defibrillator. <a href="#cmr" style="color:var(--blue); font-weight:600">See her actual CMR ↓</a></p>
+      </div></details></li>
+    <li><span class="node m22">22</span>
+      <details class="card"><summary><div class="h">Recovery</div><div class="s">LVEF 38–40% — her pre-treatment range — in 3 months</div></summary>
+      <div class="card-body">
+        <p>NT-proBNP fell &gt;95% (25,535 → 1,337 → 659, plateauing near 1,000 pg/mL). Echo at 3 months: LVEF 38% biplane (40% visual), GLS −13%, normal cavity size, no mitral regurgitation, normal RV. The defibrillator vest was discontinued.</p>
+        <p>By 5 months she was NYHA II, euvolemic, and had regained 16 kg. She meets the definition of <button class="t" data-g="hfimpef">HF with improved EF</button> — which is a reason to continue therapy, not to stop it (<button class="t" data-g="tred">TRED-HF</button>).</p>
+        <p class="muted">Still owed: IV iron (TSAT 12%), genetic testing, and reconciliation of a month-21 surveillance PET (Deauville 5 peritoneal nodules, unconfirmed).</p>
+      </div></details></li>
+  </ul>
+</section>
+
+<!-- ================= CMR ================= -->
+<section id="cmr">
+  <h2>Her cardiac MRI, in motion</h2>
+  <p class="muted" style="margin-top:-6px">Month 19 — one mid-ventricular slice. The poster can only print two frames of this; here is the whole cardiac cycle.</p>
+  <div class="panel">
+    <img id="cineimg" src="assets/cine_loop.webp" alt="Cine CMR loop of a dilated left ventricle contracting minimally through the cardiac cycle" style="width:100%; border-radius:12px; display:block">
+    <p class="cap"><b>A full heartbeat, looping.</b> A dilated, thin-walled ventricle that barely changes size from diastole to systole — this is what an ejection fraction of 7–10% looks like.</p>
+    <div class="cine" style="margin-top:14px">
+      <div><img src="assets/ed.jpg" alt="Cine CMR still at end-diastole"><div class="cap"><b>End-diastole</b> — fully filled</div></div>
+      <div><img src="assets/es.jpg" alt="Cine CMR still at end-systole, nearly unchanged from diastole"><div class="cap"><b>End-systole</b> — almost no change</div></div>
+    </div>
+    <div class="lgewrap" id="lgewrap">
+      <img src="assets/lge.jpg" alt="Phase-sensitive late gadolinium enhancement image of the same slice">
+      <svg viewBox="0 0 100 100" aria-hidden="true">
+        <ellipse cx="44" cy="46" rx="21" ry="23" fill="none" stroke="var(--orange)" stroke-width="1.4" stroke-dasharray="3 2.4" opacity=".85"/>
+        <line x1="16" y1="86" x2="41" y2="48" stroke="var(--orange)" stroke-width="2"/>
+        <path d="M41 48 l-6.4 .4 2.6 5.9 z" fill="var(--orange)"/>
+        <text x="6" y="95" font-size="5.6" font-weight="700" fill="#ffb38a" stroke="#15150f" stroke-width="1.1" paint-order="stroke">mid-wall septal scar</text>
+      </svg>
+    </div>
+    <div style="display:flex; justify-content:space-between; align-items:center; gap:10px; margin-top:10px; flex-wrap:wrap">
+      <span class="cap" style="margin:0"><b>Same slice, late gadolinium enhancement.</b></span>
+      <button class="toggle" id="lgebtn" aria-pressed="false">Show the scar</button>
+    </div>
+    <p class="cap" style="margin-top:10px"><b>Why CMR settles the differential:</b> no subendocardial, coronary-territory scar (and calcium score 0) → not ischemic. No T2 edema → not active myocarditis. Anthracycline injury usually leaves <b>no</b> LGE at all. A thin <b>mid-wall septal stripe</b> is replacement fibrosis — gadolinium pooling in collagen-expanded interstitium — the hallmark of non-ischemic dilated cardiomyopathy, often genetic, and a marker of sudden-death risk and incomplete recovery. It is the fixed substrate beneath a reversible collapse.</p>
+  </div>
+</section>
+
+<!-- ================= MECHANISM ================= -->
+<section id="mechanism">
+  <h2>Three hits, one collapse</h2>
+  <div class="claim" style="border-left:4px solid var(--orange)"><h3 style="color:var(--orange)">Pre-existing substrate</h3>
+    <p style="margin:4px 0 0; font-size:15px">LVEF 43.1% and an enlarged LV before any therapy. A mildly dilated, hypokinetic ventricle at 63 is how many genetic cardiomyopathies first declare themselves — <button class="t" data-g="ttn">truncating titin variants</button> are 7× enriched in "cancer-therapy cardiomyopathy." Genetic testing is pending.</p></div>
+  <div class="claim" style="border-left:4px solid var(--blue)"><h3 style="color:var(--blue)">Limited anthracycline</h3>
+    <p style="margin:4px 0 0; font-size:15px">One reported cycle, ~50 mg/m². In a 2,625-patient cohort, 98% of anthracycline cardiotoxicity appeared within the first year (median 3.5 months); her collapse came at 13 months. Possible contributor — unproven cause.</p></div>
+  <div class="claim" style="border-left:4px solid var(--maroon)"><h3 style="color:var(--maroon)">Inflammatory–catabolic stress</h3>
+    <p style="margin:4px 0 0; font-size:15px">Surgery, recurrent abscesses, malnutrition, sustained tachycardia — plus <button class="t" data-g="simd">sepsis-induced myocardial dysfunction</button>, which is profound, global, and classically reverses within 1–2 weeks of source control. This was the reversible hit; reversing it is what brought her back.</p></div>
+</section>
+
+<!-- ================= WHAT IT MEANS ================= -->
+<section id="meaning">
+  <h2>What it means</h2>
+
+  <div class="claim"><h3><span class="num">1</span>The baseline changes the diagnosis</h3>
+    <p style="font-size:15px">LVEF &lt;50% before anthracycline is high risk and calls for cardiology referral, cardioprotection, and imaging before, during, and after therapy — not a 17-month gap. <b>The result was in the chart; it never reached the treatment decisions.</b></p>
+    <details class="deeper"><summary>Go deeper: a systems failure, not a person's</summary><div class="inner">
+      <p>No single clinician erred. Oncology reacted to the echo it saw; the regimen change to R-CEOP preserved curative intent (R-CEOP retains curative potential when anthracyclines are contraindicated). What failed was the <b>transfer</b>: a high-risk baseline never generated the referral, the cardioprotection, or the surveillance the guideline attaches to it. The hospitalist admitting a cancer survivor with new heart failure is the person best positioned to go find that baseline rather than inherit the narrative — the admitting echo here was read as "chronic cardiomyopathy worsened by cardiotoxic chemo agents," a story the baseline contradicts.</p>
+    </div></details></div>
+
+  <div class="claim"><h3><span class="num">2</span>The "decline" after cycle 1 was noise</h3>
+    <p style="font-size:15px">MUGA 43% vs echo 45% is a 2-point difference <b>across two different modalities</b>, inside 2D echo's own ±11-point test–retest variability. Dysfunction was recognized, not caused.</p>
+    <details class="deeper"><summary>Go deeper: why the two numbers can't be compared</summary><div class="inner">
+      <p><b>They measure different things.</b> MUGA counts photons from labelled blood in the cavity — geometry-independent; 2D echo traces endocardial borders on two planes and assumes a geometric model. Across a population they correlate; in one patient they can differ by 5–10 points systematically.</p>
+      <p><b>The discipline cuts both ways.</b> Her month-22 biplane LVEF of 38% vs the MUGA 43.1% does <i>not</i> mean she "fell short of baseline" — that claim would be exactly as unjustified as the original "decline." What can be said: she returned to her pre-treatment <b>range</b>, cavity size normalized, the severe MR resolved, and GLS improved from −3% to −13% (normal ≲ −18%) — the strain number is the best single marker that a substrate persists.</p>
+      <p><b>Practice point:</b> serial surveillance belongs to one modality — ideally 3D echo (variability ≈6 points) with the same reader.</p>
+    </div></details></div>
+
+  <div class="claim"><h3><span class="num">3</span>The collapse was reversible; the substrate is not</h3>
+    <p style="font-size:15px">Sepsis, catabolism, and tachycardia drove her below 10%. Reversing them returned her to her range — with the septal scar and an abnormal GLS still there. Treat the precipitants; keep the GDMT.</p>
+    <details class="deeper"><summary>Go deeper: the evidence under each phrase</summary><div class="inner">
+      <p><b>Sepsis-induced myocardial dysfunction</b> was described in 1984: among 20 patients with septic shock studied by radionuclide angiography, half had EF &lt;40% acutely; survivors averaged an initial EF of 32% with ventricular dilation, and EF and volumes normalized by ~10 days. It is global (distinct from takotsubo) and can be superimposed on a weak ventricle — exactly her situation.</p>
+      <p><b>Recovery despite stopping drugs.</b> She improved although metoprolol and ivabradine were stopped for hypotension — pointing to reversal of precipitants, not a single agent.</p>
+      <p><b>Why GDMT continues anyway:</b> in recovered dilated cardiomyopathy, withdrawing therapy led to relapse in 44% within 6 months (TRED-HF). Mid-wall fibrosis independently predicts mortality and sudden death. HF-with-improved-EF is a treatment success to be maintained, not an exit ramp.</p>
+      <p><b>Still actionable:</b> iron deficiency (TSAT 12% — ferritin is inflamed and misleading; IV iron carries a Class I recommendation for symptoms), genetic testing with family screening, and re-challenge of the stopped agents as blood pressure allows.</p>
+    </div></details></div>
+</section>
+
+<!-- ================= ALGORITHM ================= -->
+<section id="algorithm">
+  <h2>Take-home algorithm</h2>
+  <ol class="algo">
+    <li>Heart failure after cancer therapy</li>
+    <div class="arr" aria-hidden="true">↓</div>
+    <li class="hot">Reconstruct the pre-treatment EF — compare only within one modality</li>
+    <div class="arr" aria-hidden="true">↓</div>
+    <li>Dysfunction predated therapy? Seek the substrate: scar on CMR, genetics</li>
+    <div class="arr" aria-hidden="true">↓</div>
+    <li class="go">Treat reversible precipitants — sepsis, iron, rate, volume — keep the GDMT</li>
+  </ol>
+</section>
+
+<!-- ================= REFERENCES ================= -->
+<section id="references">
+  <h2>The publishable case &amp; sources</h2>
+  <p><a class="pdfbtn" href="https://www.dropbox.com/scl/fi/xx4m0bu0p2y7g2az4vk90/Punjya-CardioOnc-CaseReport-Full.pdf?rlkey=jqjzi0tge94iwscwptl9klsli&amp;st=e770fhob&amp;dl=0">Download the publishable case report (PDF) →</a></p>
+  <details class="card" style="margin-top:14px"><summary><div class="h">Key references</div><div class="s">10 primary sources + 3 supplemental</div></summary>
+  <div class="card-body"><ol class="refs">
+    <li>Lyon AR, et al. HFA-ICOS baseline risk assessment. <i>Eur J Heart Fail</i>. 2020;22:1945-60.</li>
+    <li>Lyon AR, et al. 2022 ESC Guidelines on cardio-oncology. <i>Eur Heart J</i>. 2022;43:4229-361.</li>
+    <li>Moccia AA, et al. R-CEOP in DLBCL with anthracycline contraindication. <i>Blood Adv</i>. 2021;5:1483-9.</li>
+    <li>Thavendiranathan P, et al. Reproducibility of echocardiographic LVEF. <i>J Am Coll Cardiol</i>. 2013;61:77-84.</li>
+    <li>Cardinale D, et al. Early detection of anthracycline cardiotoxicity. <i>Circulation</i>. 2015;131:1981-8.</li>
+    <li>Modi K, et al. LGE in anthracycline/trastuzumab cardiotoxicity. <i>Eur Heart J Cardiovasc Imaging</i>. 2021;22:427-34.</li>
+    <li>Arbelo E, et al. 2023 ESC cardiomyopathy guidelines. <i>Eur Heart J</i>. 2023;44:3503-626.</li>
+    <li>Halliday BP, et al. TRED-HF. <i>Lancet</i>. 2019;393:61-73.</li>
+    <li>Garcia-Pavia P, et al. Genetic variants in cancer-therapy cardiomyopathy. <i>Circulation</i>. 2019;140:31-41.</li>
+    <li>McDonagh TA, et al. 2023 focused update, ESC HF guidelines. <i>Eur Heart J</i>. 2023;44:3627-39.</li>
+    <li>Ewer MS, Lippman SM. Type II chemotherapy-related cardiac dysfunction. <i>J Clin Oncol</i>. 2005;23:2900-2.</li>
+    <li>Ewer MS, et al. Reversibility of trastuzumab-related cardiotoxicity. <i>J Clin Oncol</i>. 2005;23:7820-6.</li>
+    <li>Parker MM, et al. Reversible myocardial depression in septic shock. <i>Ann Intern Med</i>. 1984;100:483-90.</li>
+  </ol></div></details>
+  <div class="draft">Draft clinical vignette — companion to the SHM poster (October 2026). Not peer-reviewed. Written patient consent for publication obtained; timing shown relative to lymphoma diagnosis; outside chemotherapy records pending. The authors report no relevant financial relationships.</div>
+</section>
+
+<div class="foot wrap">Punjya NR, Low AYT, Ebong IA, Jimenez S, Signoff ED · Department of Internal Medicine &amp; Division of Cardiovascular Medicine, UC Davis Health</div>
+</div>
+
+<!-- glossary sheet -->
+<div id="scrim"></div>
+<div id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
+  <button class="close" aria-label="Close">✕</button>
+  <h3 id="sheet-title"></h3>
+  <div id="sheet-body"></div>
+</div>
+
+<script>
+const GLOSS = {
+  muga: ["MUGA (multigated acquisition) scan", "<p>A nuclear-medicine ejection-fraction measurement: red cells are radiolabelled and a gamma camera counts photons from blood in the ventricular cavity across the cardiac cycle. Geometry-independent and highly reproducible — but its values are <b>not interchangeable</b> with echo values, which rely on tracing borders and geometric assumptions.</p>"],
+  var: ["±11 points: 2D-echo test–retest variability", "<p>If the same stable patient has two 2D echocardiograms, the LVEF can differ by up to ~11 percentage points from measurement noise alone (Thavendiranathan 2013). 3D echo narrows this to ~6 points. So a 2-point 'change' — across two <i>different</i> modalities — carries no information.</p>"],
+  icos: ["HFA-ICOS baseline risk", "<p>The Heart Failure Association / International Cardio-Oncology Society proforma stratifies patients before cardiotoxic therapy. A baseline LVEF &lt;50% alone puts a patient in the <b>high-risk</b> category: the 2022 ESC cardio-oncology guideline then recommends cardiology referral before treatment (Class I), cardioprotective strategies (Class IIa), and imaging surveillance before, during, and after therapy.</p>"],
+  gls: ["GLS (global longitudinal strain)", "<p>How much the ventricular muscle shortens along its long axis, in percent — more negative is better; normal is around −18% to −20%. More sensitive than LVEF for subtle dysfunction. Hers: −3% at the nadir, −13% at recovery — improved, still abnormal: the best single marker that a substrate persists.</p>"],
+  lge: ["LGE (late gadolinium enhancement)", "<p>Gadolinium contrast washes out of healthy myocardium but pools where collagen has expanded the interstitium — scar lights up on delayed imaging. The <b>pattern</b> is the diagnosis: subendocardial in a coronary territory = infarct; patchy subepicardial = myocarditis; a thin <b>mid-wall stripe</b> = the fibrosis of non-ischemic dilated cardiomyopathy. Anthracycline injury usually produces no LGE at all (~10% of evaluations, usually with another explanation).</p>"],
+  lvedvi: ["LVEDVI 151 mL/m²", "<p>Left ventricular end-diastolic volume indexed to body surface area. Normal is roughly ≤ 90–100 mL/m² — 151 is a severely dilated ventricle.</p>"],
+  gdmt: ["GDMT (guideline-directed medical therapy)", "<p>The four-pillar heart-failure regimen: ARNI (sacubitril/valsartan), beta-blocker, mineralocorticoid antagonist, and SGLT2 inhibitor. She also received digoxin and ivabradine for rate control in low-output tachycardia, and apixaban for thromboembolism.</p>"],
+  rchop: ["R-CHOP → R-CEOP", "<p><b>R-CHOP</b>: rituximab, cyclophosphamide, doxorubicin (H), vincristine (O), prednisone — standard curative therapy for DLBCL. <b>R-CEOP</b> swaps etoposide (E) for doxorubicin when the heart can't take an anthracycline, and retains curative potential (Moccia 2021). One standard R-CHOP cycle delivers ~50 mg/m² of doxorubicin; heart-failure risk becomes measurable in trials around 400 mg/m².</p>"],
+  dlbcl: ["DLBCL", "<p>Diffuse large B-cell lymphoma — the most common aggressive non-Hodgkin lymphoma, treated with curative intent. Hers was EBV-positive and arose in the rectosigmoid colon, an uncommon primary site.</p>"],
+  deauville: ["Deauville score", "<p>A 5-point PET scale for lymphoma response. 1 = no uptake (complete metabolic response, her month-14 result); 5 = uptake markedly above liver (her month-21 peritoneal nodules — suspicious for recurrence, unconfirmed).</p>"],
+  hfimpef: ["HF with improved EF (HFimpEF)", "<p>Heart failure where a previously reduced EF (≤40%) rises by ≥10 points to above 40%. The word is <i>improved</i>, not <i>recovered</i>: the substrate usually persists, and therapy continues.</p>"],
+  tred: ["TRED-HF", "<p>A randomized trial in recovered dilated cardiomyopathy: withdrawing heart-failure therapy led to relapse in 44% within 6 months (Halliday 2019, Lancet). The reason 'she got better' is not a reason to stop her medications.</p>"],
+  ttn: ["Truncating titin variants (TTNtv)", "<p>Truncations of titin — the sarcomere's molecular spring — are the most common genetic cause of dilated cardiomyopathy. In cancer-therapy–induced cardiomyopathy they were found in 7.5% of patients vs 1.1% of cancer controls (Garcia-Pavia 2019): a 'cardiotoxic' phenotype is often a genetic ventricle unmasked by stress. Testing (with family screening) was recommended and is pending.</p>"],
+  simd: ["Sepsis-induced myocardial dysfunction", "<p>Profound, global, and reversible myocardial depression during severe sepsis — described by Parker in 1984: half of septic-shock patients had EF &lt;40% acutely, survivors averaged EF 32% with dilation, and function normalized by ~10 days. Distinct from takotsubo, and it can land on top of a pre-existing weak ventricle — her exact situation at month 19.</p>"]
+};
+const sheet = document.getElementById('sheet'), sTitle = document.getElementById('sheet-title'), sBody = document.getElementById('sheet-body');
+let lastFocus = null;
+function openSheet(key){ const g = GLOSS[key]; if(!g) return;
+  sTitle.textContent = g[0]; sBody.innerHTML = g[1];
+  lastFocus = document.activeElement; document.body.classList.add('sheet-open');
+  sheet.querySelector('.close').focus(); }
+function closeSheet(){ document.body.classList.remove('sheet-open'); if(lastFocus) lastFocus.focus(); }
+document.addEventListener('click', e => {
+  const t = e.target.closest('button.t'); if(t){ openSheet(t.dataset.g); return; }
+  if(e.target.closest('#sheet .close') || e.target.id === 'scrim') closeSheet();
+});
+document.addEventListener('keydown', e => { if(e.key === 'Escape') closeSheet(); });
+
+// EF chart interactions
+const NOTES = {
+  muga: "<b>Month 0 — MUGA 43.1%.</b> Mildly enlarged LV, no wall-motion abnormality, before any drug. Already HFA-ICOS high risk — the result that should have routed her to cardiology.",
+  echo: "<b>After cycle 1 — echo ≈45%.</b> A different modality, 2 points away. Tap the variability button: the error bar swallows the “change” whole. Dysfunction was recognized here, not caused.",
+  nadir: "<b>Month 19 — LVEF <10%.</b> After fistula surgery, recurrent abscesses, and malnutrition. NT-proBNP 25,535; coronary CTA clean; mid-wall septal scar on CMR.",
+  rec: "<b>Month 22 — 38–40% on GDMT.</b> Back in her pre-treatment range with a normal cavity and no MR — a reversible collapse on a fixed substrate. GLS −13%: improved, still abnormal."
+};
+const note = document.getElementById('chartnote');
+document.querySelectorAll('.pt').forEach(p => {
+  const act = () => { note.innerHTML = NOTES[p.dataset.pt]; };
+  p.addEventListener('click', act);
+  p.addEventListener('keydown', e => { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); act(); } });
+});
+const varbtn = document.getElementById('varbtn'), varband = document.getElementById('varband');
+varbtn.addEventListener('click', () => {
+  const on = varbtn.getAttribute('aria-pressed') !== 'true';
+  varbtn.setAttribute('aria-pressed', String(on));
+  varband.style.opacity = on ? '0.16' : '0';
+  if(on) note.innerHTML = "<b>The blue band is ±11 points around the cycle-1 echo</b> — 2D echo’s own test–retest variability (3D echo: ~6). Both the MUGA and any true value of that echo live inside it. A 2-point cross-modality difference is silence, not signal.";
+});
+
+// LGE annotation toggle
+const lgebtn = document.getElementById('lgebtn');
+lgebtn.addEventListener('click', () => {
+  const on = lgebtn.getAttribute('aria-pressed') !== 'true';
+  lgebtn.setAttribute('aria-pressed', String(on));
+  document.getElementById('lgewrap').classList.toggle('on', on);
+  lgebtn.textContent = on ? 'Hide annotation' : 'Show the scar';
+});
+
+// respect reduced motion: swap the cine loop for the still
+try{ if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+  const c = document.getElementById('cineimg'); c.src = 'assets/ed.jpg';
+}}catch(e){}
+</script>
+
+</body>
+</html>

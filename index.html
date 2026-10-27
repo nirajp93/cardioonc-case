@@ -57,6 +57,7 @@ section{margin:40px 0}
 /* question card */
 .question{background:var(--navy); color:#fff; border-radius:14px; padding:16px 18px; margin:22px 0}
 :root[data-theme="dark"] .question, .dkq{background:#232a52}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .question{background:#232a52} }
 .question .q{font-size:18px; font-weight:700; line-height:1.4; color:#fff}
 .question .a{font-size:14px; color:#c7d2f4; margin-top:6px}
 
@@ -365,6 +366,14 @@ body.sheet-open #sheet{transform:none}
     <div class="arr" aria-hidden="true">↓</div>
     <li class="go">Treat reversible precipitants — sepsis, iron, rate, volume — keep the GDMT</li>
   </ol>
+</section>
+
+<!-- ================= WHY IT MATTERS ================= -->
+<section id="significance">
+  <div class="question" style="margin:0">
+    <div style="font-size:11.5px; font-weight:700; letter-spacing:.14em; color:#c7d2f4">WHY THIS CASE MATTERS</div>
+    <p style="color:#fff; font-size:16.5px; line-height:1.55; margin:8px 0 0">Most heart failure after cancer therapy cannot be adjudicated because no baseline exists; this case had one, and it reversed the default attribution. The label matters: “anthracycline cardiomyopathy” would have closed doors — to future therapy, to genetic testing, to an accurate prognosis — that “pre-existing cardiomyopathy with a reversible second hit” leaves open.</p>
+  </div>
 </section>
 
 <!-- ================= REFERENCES ================= -->
